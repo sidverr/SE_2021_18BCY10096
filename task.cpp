@@ -3,7 +3,8 @@ using namespace std;
 
 string A_qaws(string qw, string op);
 string B_qaws(string qw, string op);
-void forward(int x, int y);
+void Aforward(int x, int y, string qw);
+void Bforward(int x,int y, string qw);
 
 string a = "A-",b="B-",chess[5][5], amove, bmove, charac,qw,op;
 
@@ -37,11 +38,11 @@ int main() {
     
     cout<<"Player A's move:";
     cin>>amove;
-    cout<<A_qaws(amove.substr(0,2),amove.substr(4,4));
+    A_qaws(amove.substr(0,2),amove.substr(3,3));
     
     cout<<"Player B's move:";
     cin>>bmove;
-    cout<<B_qaws(bmove.substr(0,2),bmove.substr(4,4));
+    B_qaws(bmove.substr(0,2),bmove.substr(3,3));
     
     
     return 0;
@@ -51,8 +52,9 @@ int main() {
 string B_qaws(string qw, string op){
     for(int i=0;i<5;i++){
         for(int j=0;j<5;j++){
-            if( chess[i][j] == (a + qw)){
-                forward(i,j);
+            if( chess[i][j] == (b + qw)){
+                chess[i][j] = "-";
+                Bforward(i,j,bmove.substr(0,2));
             }
         }
     }
@@ -63,18 +65,34 @@ string A_qaws(string qw, string op){
     for(int i=0;i<5;i++){
         for(int j=0;j<5;j++){
             if( chess[i][j] == (a + qw)){
-                forward(i,j);
+                chess[i][j] = "-";
+                Aforward(i,j,amove.substr(0,2));
             }
         }
     }
     return "1";
 }
 
-void forward(int x,int y){
+void Aforward(int x,int y, string qw){
     for(int i=0;i<5;i++){
         for(int j=0;j<5;j++){
-            if(i== x-1 && j==y-1)
-            chess[i][j] = a + qw;
+            if(i==x-1 && j==y)
+            chess[i][j] = (a + qw);
+        }
+    }
+    cout<<"Current Grid:"<<endl;
+    for(int i=0;i<5;i++){
+        for(int j=0;j<5;j++)
+        cout<<chess[i][j]<<"		";
+        cout<<endl;
+    }
+}
+
+void Bforward(int x,int y, string qw){
+    for(int i=0;i<5;i++){
+        for(int j=0;j<5;j++){
+            if(i==x+1 && j==y)
+            chess[i][j] = (b + qw);
         }
     }
     cout<<"Current Grid:"<<endl;
