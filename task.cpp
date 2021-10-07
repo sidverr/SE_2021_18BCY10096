@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string A_qaws(string qw, string op);
-string B_qaws(string qw, string op);
+void A_qaws(string qw, string op);
+void B_qaws(string qw, string op);
 void Aforward(int x, int y, string qw);
 void Bforward(int x,int y, string qw);
 
@@ -35,21 +35,23 @@ int main() {
         cout<<chess[i][j]<<"		";
         cout<<endl;
     }
-    
-    cout<<"Player A's move:";
-    cin>>amove;
-    A_qaws(amove.substr(0,2),amove.substr(3,3));
-    
-    cout<<"Player B's move:";
-    cin>>bmove;
-    B_qaws(bmove.substr(0,2),bmove.substr(3,3));
-    
-    
+    for(int flag =0; flag<1; flag++){
+    if(flag == 0){
+        cout<<"Player A's move:";
+        cin>>amove;
+        A_qaws(amove.substr(0,2),amove.substr(3,3));
+    }
+    if(flag == 1){
+        cout<<"Player B's move:";
+        cin>>bmove;
+        B_qaws(bmove.substr(0,2),bmove.substr(3,3));
+        flag =-1;
+    }}
     return 0;
 }
 
 
-string B_qaws(string qw, string op){
+void B_qaws(string qw, string op){
     for(int i=0;i<5;i++){
         for(int j=0;j<5;j++){
             if( chess[i][j] == (b + qw)){
@@ -58,10 +60,9 @@ string B_qaws(string qw, string op){
             }
         }
     }
-    return "1";
 }
 
-string A_qaws(string qw, string op){
+void A_qaws(string qw, string op){
     for(int i=0;i<5;i++){
         for(int j=0;j<5;j++){
             if( chess[i][j] == (a + qw)){
@@ -70,7 +71,6 @@ string A_qaws(string qw, string op){
             }
         }
     }
-    return "1";
 }
 
 void Aforward(int x,int y, string qw){
